@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+results/*.csv
+results/*.png
+results/*.json
+output/
+.vscode/
+.idea/
+*.egg-info/
+dist/
+build/
+
+# Environment variables
+.env
+.env.local

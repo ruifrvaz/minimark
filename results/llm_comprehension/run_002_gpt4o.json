@@ -1,0 +1,274 @@
+[
+  {
+    "file": "technical_doc.md",
+    "strategies": [
+      "syntax",
+      "stopwords",
+      "simplify"
+    ],
+    "original_length": 1860,
+    "minified_length": 1461,
+    "compression_ratio": 0.785483870967742,
+    "questions": [
+      {
+        "question": "What is the main topic or purpose described in this document?",
+        "type": "comprehension",
+        "original_answer": "The main topic or purpose described in the document is to provide a comprehensive guide to understanding the MiniMark format, which is designed to optimize markdown documents for LLM (Large Language Model) contexts by reducing token count through various strategies such as syntax stripping, stopword removal, sentence simplification, and synonym replacement.",
+        "minified_answer": "The main topic or purpose described in the document is the introduction and explanation of MiniMark, a revolutionary new format designed to optimize markdown documents for LLM (Large Language Model) contexts by reducing token count through techniques like syntax stripping, stopword removal, sentence simplification, and synonym replacement.",
+        "original_tokens": 487,
+        "minified_tokens": 355,
+        "token_savings": 132,
+        "equivalent": true,
+        "similarity_score": 0.95,
+        "analysis": "Both answers convey the same core information about the MiniMark format, its purpose to optimize markdown documents for LLM contexts, and the techniques used to reduce token count. The differences in wording, such as 'comprehensive guide' versus 'introduction and explanation' and 'revolutionary new format,' do not alter the fundamental meaning.",
+        "error": null
+      },
+      {
+        "question": "List the key features or main points mentioned.",
+        "type": "recall",
+        "original_answer": "The key features or main points mentioned in the document are:\n\n- **Syntax Stripping**: Removes markdown formatting characters like `**`, `##`, and ``` while preserving content.\n- **Stopword Removal**: Eliminates common words that carry little semantic weight.\n- **Sentence Simplification**: Removes filler phrases and unnecessary adverbs.\n- **Synonym Replacement**: Replaces longer words with shorter alternatives.",
+        "minified_answer": "The key features or main points mentioned in the document are:\n\n1. Syntax Stripping: Removes markdown formatting characters like `, #, preserving content.\n2. Stopword Removal: Eliminates common words that carry little semantic weight.\n3. Sentence Simplification: Removes filler phrases and unnecessary adverbs.\n4. Synonym Replacement: Replaces longer words with shorter alternatives.\n5. The primary benefit is token reduction, which is important for LLM applications to fit within a limited context window.",
+        "original_tokens": 505,
+        "minified_tokens": 392,
+        "token_savings": 113,
+        "equivalent": false,
+        "similarity_score": 0.8,
+        "analysis": "Both answers convey similar core information regarding syntax stripping, stopword removal, sentence simplification, and synonym replacement. However, Answer 2 includes an additional point about the primary benefit of token reduction for LLM applications, which is not mentioned in Answer 1.",
+        "error": null
+      },
+      {
+        "question": "If there are code examples, what do they demonstrate?",
+        "type": "technical",
+        "original_answer": "The code examples demonstrate methods from the `MiniMarkMinifier` class that are used for text processing. Specifically, they show how to remove markdown formatting characters with the `strip_markdown_syntax` method and how to eliminate common stopwords with the `remove_stopwords` method.",
+        "minified_answer": "The code examples in the document demonstrate methods provided by the `MiniMarkMinifier` class for optimizing markdown documents. Specifically, they show how to remove markdown formatting characters with the `stripmarkdownsyntax` method and eliminate common stopwords with the `remove_stopwords` method.",
+        "original_tokens": 481,
+        "minified_tokens": 351,
+        "token_savings": 130,
+        "equivalent": true,
+        "similarity_score": 0.9,
+        "analysis": "Both answers convey the same core information about the `MiniMarkMinifier` class methods used for processing text by removing markdown syntax and stopwords. The main difference is in the phrasing and slight variation in terminology, such as 'text processing' versus 'optimizing markdown documents', and a minor discrepancy in method naming format, but these do not alter the fundamental meaning.",
+        "error": null
+      },
+      {
+        "question": "What instructions or steps are provided to the reader?",
+        "type": "procedural",
+        "original_answer": "The document provides the following instructions or steps to the reader:\n\n1. **Read the Document Carefully**: The introduction advises the reader to read through the document carefully to understand all the essential concepts of the MiniMark format.\n\n2. **API Reference**: The document provides a brief API reference for the `MiniMarkMinifier` class, including methods like `strip_markdown_syntax` and `remove_stopwords`, which are used to remove markdown formatting characters and eliminate common stopwords, respectively.\n\n3. **Configuration Options**: The document outlines different levels of minification that can be configured:\n   - **Basic**: Only syntax stripping.\n   - **Moderate**: Syntax stripping plus stopword removal.\n   - **Aggressive**: Combines all strategies (syntax stripping, stopword removal, sentence simplification, and synonym replacement).\n\n4. **Recommendation**: It suggests starting with the moderate level of minification to see the results before moving to aggressive minification.\n\nThese instructions guide the reader on how to use the MiniMark format and its features effectively.",
+        "minified_answer": "The document provides the following instructions or steps to the reader:\n\n1. Read the document carefully to grasp the essential concepts of MiniMark.\n2. Consider the approach of using MiniMark for optimizing markdown documents in LLM contexts.\n3. Use the `MiniMarkMinifier` class, which provides methods such as `stripmarkdownsyntax` to remove markdown formatting characters and `remove_stopwords` to eliminate common stopwords.\n4. Configure the minification level according to your needs:\n   - Basic: Syntax stripping\n   - Moderate: Syntax stripping + stopwords removal\n   - Aggressive: Combine strategies, starting at a moderate level and moving to aggressive minification to see results.\n5. Try MiniMark and provide feedback on your experience.",
+        "original_tokens": 639,
+        "minified_tokens": 444,
+        "token_savings": 195,
+        "equivalent": false,
+        "similarity_score": 0.8,
+        "analysis": "Both answers convey similar core information about reading the document carefully, using the MiniMarkMinifier class, and configuring minification levels. However, Answer 2 introduces an additional point about using MiniMark for optimizing markdown documents in LLM contexts and suggests providing feedback, which is not mentioned in Answer 1. This additional information makes the answers not fully equivalent.",
+        "error": null
+      }
+    ],
+    "comprehension_preserved": 0.5,
+    "avg_similarity": 0.8625,
+    "total_token_savings": 570
+  },
+  {
+    "file": "llm_prompt_guide.md",
+    "strategies": [
+      "syntax",
+      "stopwords",
+      "simplify"
+    ],
+    "original_length": 3401,
+    "minified_length": 2538,
+    "compression_ratio": 0.7462511026168774,
+    "questions": [
+      {
+        "question": "What is the main topic or purpose described in this document?",
+        "type": "comprehension",
+        "original_answer": "The main topic or purpose of the document is to teach the fundamentals of prompt engineering for large language models (LLMs). It provides guidelines and techniques for crafting effective prompts to improve the quality of responses from AI models.",
+        "minified_answer": "The main topic or purpose described in the document is to introduce and teach the fundamentals of prompt engineering for large language models (LLMs). It explains the art of crafting effective instructions for AI models, detailing the process of designing and optimizing prompts to get better responses from LLMs. The document provides core principles, techniques, and best practices for effective prompt engineering.",
+        "original_tokens": 805,
+        "minified_tokens": 573,
+        "token_savings": 232,
+        "equivalent": true,
+        "similarity_score": 0.9,
+        "analysis": "Both answers convey the same core information and meaning, focusing on teaching the fundamentals of prompt engineering for large language models. They both mention guidelines or techniques for crafting effective prompts to improve AI responses. Answer 2 provides slightly more detail by mentioning core principles and best practices, but the overall purpose and topic remain consistent between the two answers.",
+        "error": null
+      },
+      {
+        "question": "List the key features or main points mentioned.",
+        "type": "recall",
+        "original_answer": "The key features or main points mentioned in the document are:\n\n1. **Introduction to Prompt Engineering**: Understanding the fundamentals and importance of crafting effective prompts for large language models (LLMs).\n\n2. **Core Principles**:\n   - **Be Specific**: Craft specific prompts to improve the quality of responses.\n   - **Provide Context**: Include relevant context to enhance the model's understanding.\n   - **Use Examples**: Demonstrate desired outcomes through examples to guide the model.\n\n3. **Advanced Techniques**:\n   - **Chain of Thought**: Encourage step-by-step reasoning to improve problem-solving.\n   - **Role Assignment**: Assign specific roles or personas to the model for tailored responses.\n   - **Temperature and Parameters**: Adjust settings like temperature for different tasks (creative vs. factual).\n\n4. **Common Pitfalls**:\n   - Avoid overly complex prompts.\n   - Ensure all necessary context is included in each prompt.\n   - Consider edge cases in prompt design.\n\n5. **Best Practices Summary**:\n   - Be specific and clear.\n   - Provide sufficient context.\n   - Use examples.\n   - Iterate and refine prompts.\n   - Test different approaches to find the most effective method.\n\nThe guide emphasizes that prompt engineering is more of an art than a science and encourages experimentation with these techniques.",
+        "minified_answer": "The key features or main points mentioned in the document are:\n\n1. **Definition of Prompt Engineering**: The process of designing and optimizing prompts to get better responses from large language models (LLMs).\n\n2. **Importance of Quality Prompts**: The quality of the prompt directly affects the quality of the output.\n\n3. **Core Principles**:\n   - **Specificity**: Ask specific questions rather than vague ones.\n   - **Provide Context**: Give the model relevant context to improve responses.\n   - **Use Examples**: Show the model what you want with examples.\n\n4. **Advanced Techniques**:\n   - **Chain of Thought**: Encourage the model to think step by step to improve reasoning.\n   - **Role Assignment**: Instruct the model to adopt a specific role or persona.\n   - **Temperature Parameters**: Adjust temperature settings based on the task (creative, factual, balanced).\n\n5. **Common Pitfalls**:\n   - Avoid overly complex prompts; keep them clear and concise.\n   - Provide necessary context as models do not remember previous conversations.\n   - Consider edge cases in prompts.\n\n6. **Best Practices Summary**:\n   - Be specific and clear about what you want.\n   - Provide sufficient context for the task.\n   - Use examples to guide the model.\n   - Iterate and refine prompts.\n   - Test different approaches to find what works best.\n\n7. **Encouragement to Experiment**: The guide encourages experimenting with techniques to see what works best for the user's specific use case.",
+        "original_tokens": 1023,
+        "minified_tokens": 807,
+        "token_savings": 216,
+        "equivalent": true,
+        "similarity_score": 0.95,
+        "analysis": "Both answers convey the same core information and meaning regarding prompt engineering for large language models. They cover the definition, importance, core principles, advanced techniques, common pitfalls, best practices, and the encouragement to experiment. The slight differences in wording do not alter the overall meaning or key points presented.",
+        "error": null
+      },
+      {
+        "question": "If there are code examples, what do they demonstrate?",
+        "type": "technical",
+        "original_answer": "The code examples in the document demonstrate how to use examples to guide the model in performing specific tasks. For instance, the document provides an example of converting sentences to past tense. It shows input-output pairs to illustrate the desired transformation:\n\n- Example 1:\n  - Input: \"I walk to the store\"\n  - Output: \"I walked to the store\"\n\n- Example 2:\n  - Input: \"She writes code\"\n  - Output: \"She wrote code\"\n\nThen, it prompts the model to convert another sentence: \"They build applications.\" This demonstrates how providing examples can effectively guide the model to produce the desired output.",
+        "minified_answer": "The code examples in the document demonstrate how to convert sentences from present tense to past tense. They provide specific input-output pairs to guide the model in understanding the task. For instance, the input \"walk store\" is converted to the output \"walked store,\" and \"writes code\" is converted to \"wrote code.\" These examples illustrate the use of examples to show the model what is expected in terms of output.",
+        "original_tokens": 889,
+        "minified_tokens": 584,
+        "token_savings": 305,
+        "equivalent": true,
+        "similarity_score": 0.85,
+        "analysis": "Both answers convey the core information that the document provides examples to guide a model in converting sentences from present tense to past tense. They both mention the use of input-output pairs to illustrate this transformation. However, Answer 2 contains inaccuracies in the examples provided, which slightly affects the precision of the conveyed information.",
+        "error": null
+      },
+      {
+        "question": "What instructions or steps are provided to the reader?",
+        "type": "procedural",
+        "original_answer": "The document provides several instructions and steps for effective prompt engineering:\n\n1. **Be Specific**: Craft specific prompts rather than vague ones to improve the quality of the output.\n\n2. **Provide Context**: Include relevant context in your prompts, as it is critical for getting accurate responses.\n\n3. **Use Examples**: Show the model what you want by providing examples, which is an effective way to guide the model.\n\n4. **Chain of Thought**: Encourage the model to think step by step to improve reasoning and problem-solving.\n\n5. **Role Assignment**: Assign a specific role or persona to the model to tailor the response to your needs.\n\n6. **Temperature and Parameters**: Adjust the temperature settings based on the task type (creative, factual, or balanced).\n\n7. **Avoid Overly Complex Prompts**: Keep prompts clear and concise to avoid confusion.\n\n8. **Assume No Context**: Always provide all necessary information in each prompt, as the model doesn't remember previous interactions.\n\n9. **Consider Edge Cases**: Include edge cases in your prompts to ensure comprehensive responses.\n\n10. **Iterate and Refine**: Continuously iterate and refine your prompts to improve results.\n\n11. **Test Different Approaches**: Experiment with different techniques to find what works best for your specific use case.",
+        "minified_answer": "The document provides several instructions or steps for effective prompt engineering with large language models:\n\n1. **Be Specific**: Ask specific questions rather than vague ones. For example, instead of saying \"Tell me about Python,\" specify what aspect you want to know, like \"Explain how Python's garbage collection works, focusing on reference counting and generational collection.\"\n\n2. **Provide Context**: Give the model relevant context to improve the quality of the response. For example, if building a REST API using Flask, provide details about the task and requirements.\n\n3. **Use Examples**: Show the model what you want by providing examples. For instance, if converting sentences to past tense, provide input-output examples.\n\n4. **Chain of Thought**: Encourage the model to think step by step to improve reasoning. For example, when solving a problem, guide it through each step.\n\n5. **Role Assignment**: Tell the model to adopt a specific role or persona, such as an expert Python developer, to tailor the response.\n\n6. **Temperature Parameters**: Adjust the temperature setting based on the task type. Use higher temperatures for creative tasks and lower temperatures for factual tasks.\n\n7. **Avoid Overly Complex Prompts**: Keep prompts clear and concise to avoid confusion.\n\n8. **Assume No Context Memory**: Include necessary information in the prompt, as the model does not remember previous conversations.\n\n9. **Consider Edge Cases**: Always consider edge cases when crafting prompts, such as generating email subject lines with specific character limits.\n\n10. **Iterate and Refine**: Test different approaches and refine prompts to find what works best.\n\n11. **Follow Best Practices**: Be specific and clear, provide sufficient context, use examples, and iterate on prompts to improve results.",
+        "original_tokens": 1026,
+        "minified_tokens": 857,
+        "token_savings": 169,
+        "equivalent": true,
+        "similarity_score": 0.95,
+        "analysis": "Both answers convey the same core information and meaning regarding effective prompt engineering techniques. They cover similar points such as specificity, context provision, use of examples, chain of thought, role assignment, temperature adjustment, simplicity, context assumption, edge cases, iteration, and testing different approaches. The main difference lies in the examples provided in Answer 2, which slightly elaborates on some points, but the fundamental instructions remain consistent across both answers.",
+        "error": null
+      }
+    ],
+    "comprehension_preserved": 1.0,
+    "avg_similarity": 0.9125,
+    "total_token_savings": 922
+  },
+  {
+    "file": "readme_example.md",
+    "strategies": [
+      "syntax",
+      "stopwords",
+      "simplify"
+    ],
+    "original_length": 2299,
+    "minified_length": 1804,
+    "compression_ratio": 0.784688995215311,
+    "questions": [
+      {
+        "question": "What is the main topic or purpose described in this document?",
+        "type": "comprehension",
+        "original_answer": "The main topic or purpose described in this document is to provide information about \"MyAwesomeProject,\" a tool designed to help developers write better code by offering features such as code analysis, auto-formatting, testing integration, and documentation generation. The document includes details on installation, usage, configuration, contributing, and support for the project.",
+        "minified_answer": "The main topic or purpose described in the document is to provide information about \"MyAwesomeProject,\" a tool designed to help developers write better code by offering features such as code analysis, auto-formatting, testing integration, and documentation generation. The document includes instructions for installation, usage, configuration, contribution guidelines, and support.",
+        "original_tokens": 609,
+        "minified_tokens": 453,
+        "token_savings": 156,
+        "equivalent": true,
+        "similarity_score": 0.95,
+        "analysis": "Both answers convey the same core information and meaning. They describe 'MyAwesomeProject' as a tool for developers with features like code analysis, auto-formatting, testing integration, and documentation generation. Both mention the document includes details on installation, usage, configuration, contributing, and support, with minor wording differences that do not affect the overall meaning.",
+        "error": null
+      },
+      {
+        "question": "List the key features or main points mentioned.",
+        "type": "recall",
+        "original_answer": "The key features or main points mentioned in the document are:\n\n- **Code Analysis**: Analyzes your code for potential issues.\n- **Auto-formatting**: Automatically formats code according to style guidelines.\n- **Testing Integration**: Integrates seamlessly with popular testing frameworks.\n- **Documentation Generation**: Generates API documentation from code comments.",
+        "minified_answer": "The key features or main points mentioned in the document are:\n\n1. **Code Analysis**: Analyzes code for potential issues.\n2. **Auto-formatting**: Automatically formats code according to style guidelines.\n3. **Testing Integration**: Integrates seamlessly with popular testing frameworks.\n4. **Documentation Generation**: Generates API documentation from code comments.\n5. **Installation**: Instructions for installing MyAwesomeProject.\n6. **Usage Example**: Provides a basic example of how to use the tool.\n7. **Configuration**: Instructions for configuring the tool using a `.myawesomeproject.json` file.\n8. **Contributing**: Guidelines for contributing to the project.\n9. **License**: The project is under the MIT License.\n10. **Support**: Instructions for seeking support by opening an issue on GitHub.",
+        "original_tokens": 609,
+        "minified_tokens": 556,
+        "token_savings": 53,
+        "equivalent": false,
+        "similarity_score": 0.4,
+        "analysis": "Answer 1 and Answer 2 share some common features such as code analysis, auto-formatting, testing integration, and documentation generation. However, Answer 2 includes additional information about installation, usage examples, configuration, contributing, license, and support, which are not mentioned in Answer 1. Therefore, they do not convey the same core information and meaning.",
+        "error": null
+      },
+      {
+        "question": "If there are code examples, what do they demonstrate?",
+        "type": "technical",
+        "original_answer": "The code examples in the document demonstrate how to use the MyAwesomeProject tool. Specifically, they show:\n\n1. How to initialize the code analyzer with specific rules (complexity, style, security).\n2. How to analyze a file (`src/index.js`) using the initialized analyzer and handle the results of the analysis.",
+        "minified_answer": "The code examples demonstrate how to use MyAwesomeProject to analyze code. Specifically, they show how to initialize the code analyzer with certain rules (such as 'complexity', 'style', and 'security'), and how to analyze a file ('src/index.js') to obtain and log the analysis results.",
+        "original_tokens": 606,
+        "minified_tokens": 448,
+        "token_savings": 158,
+        "equivalent": true,
+        "similarity_score": 0.95,
+        "analysis": "Both answers convey the same core information about using the MyAwesomeProject tool to initialize a code analyzer with specific rules and analyze a file, handling the results. The differences in wording do not alter the meaning or core information conveyed.",
+        "error": null
+      },
+      {
+        "question": "What instructions or steps are provided to the reader?",
+        "type": "procedural",
+        "original_answer": "The document provides the following instructions or steps to the reader:\n\n1. **Installation Steps**:\n   - Clone the repository using `git clone https://github.com/username/myawesomeproject.git`.\n   - Navigate to the directory with `cd myawesomeproject`.\n   - Install dependencies using `npm install`.\n   - Run the setup script with `npm run setup`.\n\n2. **Usage Example**:\n   - Import the tool using `const analyzer = require('myawesomeproject');`.\n   - Initialize the analyzer with specific rules.\n   - Analyze a file and handle the results.\n\n3. **Configuration**:\n   - Create a `.myawesomeproject.json` file in the project root to configure the tool with specific rules and settings.\n\n4. **Contributing Guidelines**:\n   - Fork the repository.\n   - Create a feature branch.\n   - Make changes and write tests.\n   - Submit a pull request ensuring all tests pass.\n\n5. **Support**:\n   - Open an issue on GitHub if any issues are encountered.",
+        "minified_answer": "The document provides the following instructions or steps to the reader:\n\n1. **Installation Instructions:**\n   - Clone the repository using the command: `git clone https://github.com/username/myawesomeproject.git`\n   - Navigate to the directory: `cd myawesomeproject`\n   - Install dependencies: `npm install`\n   - Run the setup script: `npm run setup`\n\n2. **Usage Instructions:**\n   - Initialize the analyzer with: `const analyzer = require('myawesomeproject');`\n   - Create a new `CodeAnalyzer` instance with specific rules: `const myAnalyzer = new analyzer.CodeAnalyzer({ rules: ['complexity', 'style', 'security'] });`\n   - Analyze a file and handle the results: \n     ```javascript\n     myAnalyzer.analyze('src/index.js').then(results => {\n       console.log('Analysis results:', results);\n     });\n     ```\n\n3. **Configuration Instructions:**\n   - Configure the tool by creating a `.myawesomeproject.json` file in the project root with the following structure:\n     ```json\n     {\n       \"rules\": {\n         \"complexity\": {\n           \"enabled\": true,\n           \"threshold\": 10\n         },\n         \"style\": {\n           \"enabled\": true,\n           \"preset\": \"airbnb\"\n         }\n       }\n     }\n     ```\n\n4. **Contributing Instructions:**\n   - Fork the repository.\n   - Create a feature branch.\n   - Make changes and write tests for those changes.\n   - Submit a pull request and ensure tests pass before submitting.\n\n5. **Support Instructions:**\n   - If issues are encountered, open an issue on GitHub for assistance.",
+        "original_tokens": 748,
+        "minified_tokens": 728,
+        "token_savings": 20,
+        "equivalent": true,
+        "similarity_score": 0.9,
+        "analysis": "Both answers convey the same core information and meaning regarding installation, usage, configuration, contributing, and support instructions for the project. The differences are mainly in the level of detail provided, such as the specific example of initializing and using the analyzer in Answer 2, which includes a code snippet and configuration details. However, these differences do not alter the fundamental instructions or the overall meaning conveyed by the answers.",
+        "error": null
+      }
+    ],
+    "comprehension_preserved": 0.75,
+    "avg_similarity": 0.8,
+    "total_token_savings": 387
+  },
+  {
+    "file": "api_documentation.md",
+    "strategies": [
+      "syntax",
+      "stopwords",
+      "simplify"
+    ],
+    "original_length": 1966,
+    "minified_length": 1669,
+    "compression_ratio": 0.8489318413021363,
+    "questions": [
+      {
+        "question": "What is the main topic or purpose described in this document?",
+        "type": "comprehension",
+        "original_answer": "The main topic or purpose described in this document is to provide guidance on how to integrate with a REST API service. It includes information on authentication, available endpoints, error handling, rate limiting, and best practices for using the API effectively.",
+        "minified_answer": "The main topic or purpose described in this document is to provide an overview and guidance on how to integrate and use a REST API service, including details on authentication, endpoints, error handling, rate limiting, and best practices for making API requests.",
+        "original_tokens": 575,
+        "minified_tokens": 451,
+        "token_savings": 124,
+        "equivalent": true,
+        "similarity_score": 0.95,
+        "analysis": "Both answers convey the same core information and meaning. They both describe the document's purpose as providing guidance on integrating with a REST API service, including details on authentication, endpoints, error handling, rate limiting, and best practices. The slight difference in wording does not alter the overall meaning.",
+        "error": null
+      },
+      {
+        "question": "List the key features or main points mentioned.",
+        "type": "recall",
+        "original_answer": "The key features or main points mentioned in the document are:\n\n1. **Authentication**: All API requests require an API key included in the header for authentication.\n\n2. **Base URL**: The base URL for all API endpoints is `https://api.example.com/v1`.\n\n3. **Endpoints**:\n   - **GET /users**: Retrieves a paginated list of users with optional parameters for page number and limit.\n   - **POST /users**: Creates a new user with required fields in the request body.\n\n4. **Error Handling**: The API uses standard HTTP status codes, including 200 (OK), 400 (Bad Request), 401 (Unauthorized), 404 (Not Found), and 500 (Internal Server Error).\n\n5. **Rate Limiting**: API requests are limited to 1000 per hour, with a 429 status code returned if the limit is exceeded.\n\n6. **Best Practices**:\n   - Validate input data before sending requests.\n   - Implement exponential backoff for retry logic.\n   - Cache responses to reduce API calls.\n   - Use webhooks instead of polling when available.",
+        "minified_answer": "The key features or main points mentioned in the document are:\n\n1. **Authentication**: API requests require an API key included in the header for authentication.\n\n2. **Base URL**: The base URL for API endpoints is `https://api.example.com/v1`.\n\n3. **Endpoints**:\n   - **GET /users**: Retrieves a list of users with paginated results. Optional parameters include `page` and `limit`.\n   - **POST /users**: Creates a new user. The request body must include `name`, `email`, and `password`.\n\n4. **Response Structure**: The response for the GET /users endpoint includes a list of users and pagination information.\n\n5. **Error Handling**: The API uses standard HTTP status codes such as 200 (OK), 400 (Bad Request), 401 (Unauthorized), 404 (Not Found), and 500 (Internal Server Error).\n\n6. **Rate Limiting**: There is a limit of 1000 API requests per hour. Exceeding this limit results in a 429 status code.\n\n7. **Best Practices**:\n   - Validate input data before sending requests.\n   - Implement exponential backoff for retry logic.\n   - Cache responses to reduce API calls.\n   - Use webhooks instead of polling when possible.",
+        "original_tokens": 755,
+        "minified_tokens": 666,
+        "token_savings": 89,
+        "equivalent": true,
+        "similarity_score": 0.95,
+        "analysis": "Both answers convey the same core information regarding API features such as authentication, base URL, endpoints, error handling, rate limiting, and best practices. The differences are minor, with Answer 2 providing slightly more detail on the response structure for the GET /users endpoint and specifying required fields for the POST /users endpoint. These differences do not significantly alter the overall meaning or core information conveyed.",
+        "error": null
+      },
+      {
+        "question": "If there are code examples, what do they demonstrate?",
+        "type": "technical",
+        "original_answer": "The code examples in the document demonstrate how to authenticate API requests by including an API key in the header using a `curl` command. Specifically, the example shows how to format the `Authorization` header with a Bearer token to access the API.",
+        "minified_answer": "The document contains a code example demonstrating how to include an API key in the header of a request using `curl`. The example shows how to authenticate a request to the API by including the API key in the `Authorization` header.",
+        "original_tokens": 577,
+        "minified_tokens": 448,
+        "token_savings": 129,
+        "equivalent": true,
+        "similarity_score": 0.9,
+        "analysis": "Both answers convey the same core information: they describe a code example in the document that demonstrates how to authenticate API requests by including an API key in the `Authorization` header using `curl`. The slight difference is that Answer 1 specifies the use of a Bearer token, while Answer 2 does not explicitly mention it, but the overall meaning remains the same.",
+        "error": null
+      },
+      {
+        "question": "What instructions or steps are provided to the reader?",
+        "type": "procedural",
+        "original_answer": "The document provides several instructions and steps for integrating with the API:\n\n1. **Authentication**: Include your API key in the header of all requests using the format `Authorization: Bearer YOUR_API_KEY`.\n\n2. **Base URL**: Use `https://api.example.com/v1` as the base URL for all API endpoints.\n\n3. **GET /users Endpoint**: \n   - Use this endpoint to retrieve a list of users.\n   - It supports pagination with optional parameters `page` and `limit`.\n\n4. **POST /users Endpoint**: \n   - Use this endpoint to create a new user.\n   - Include required fields such as `name`, `email`, and `password` in the request body.\n\n5. **Error Handling**: Understand the standard HTTP status codes returned by the API, such as 200, 400, 401, 404, and 500.\n\n6. **Rate Limiting**: Be aware of the limit of 1000 API requests per hour to avoid receiving a 429 status code.\n\n7. **Best Practices**:\n   - Validate input data before sending requests.\n   - Implement exponential backoff for retry logic.\n   - Cache responses to reduce API calls.\n   - Use webhooks instead of polling when available.",
+        "minified_answer": "The document provides the following instructions or steps to the reader:\n\n1. **Read the Entire Document**: It advises the reader to read the entire document before getting started with the integration.\n\n2. **Authentication**: API requests require authentication by including an API key in the header. The example provided is: `curl -H \"Authorization: Bearer YOURAPIKEY\" https://api.example.com/v1/resource`.\n\n3. **Base URL**: The base URL for API endpoints is `https://api.example.com/v1`.\n\n4. **Endpoints**:\n   - **GET /users**: Retrieves a list of users with optional pagination parameters (`page` and `limit`).\n   - **POST /users**: Creates a new user and requires a request body with fields `name`, `email`, and `password`.\n\n5. **Error Handling**: The API returns standard HTTP status codes, and some common ones are explained (e.g., 200 OK, 400 Bad Request, 401 Unauthorized, 404 Not Found, 500 Internal Server Error).\n\n6. **Rate Limiting**: There is a limit of 1000 API requests per hour. Exceeding this limit results in a 429 status code.\n\n7. **Best Practices**:\n   - Validate input data before sending requests.\n   - Implement exponential backoff retry logic.\n   - Cache responses when possible to reduce API calls.\n   - Use webhooks instead of polling when available.",
+        "original_tokens": 785,
+        "minified_tokens": 697,
+        "token_savings": 88,
+        "equivalent": true,
+        "similarity_score": 0.95,
+        "analysis": "Both answers convey the same core information and meaning regarding API integration. They cover authentication, base URL, endpoints, error handling, rate limiting, and best practices. The minor differences, such as the suggestion to read the entire document in Answer 2, do not significantly alter the core content or instructions provided.",
+        "error": null
+      }
+    ],
+    "comprehension_preserved": 1.0,
+    "avg_similarity": 0.9375,
+    "total_token_savings": 430
+  }
+]
