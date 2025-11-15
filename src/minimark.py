@@ -166,9 +166,9 @@ def main():
         description='MiniMark - Minify markdown for optimal LLM context usage'
     )
     parser.add_argument('input', help='Input markdown file path')
-    parser.add_argument('output', help='Output minimark file path')
+    parser.add_argument('--output', help='Output minimark file path (auto-generated if omitted)', default=None)
     parser.add_argument(
-        '--strategy',
+        '--strategies',
         choices=['none', 'syntax', 'stopwords', 'simplify', 'synonyms', 'all'],
         nargs='+',
         default=['all'],
@@ -186,7 +186,7 @@ def main():
     text = input_path.read_text(encoding='utf-8')
     
     # Determine strategies
-    strategies = args.strategy
+    strategies = args.strategies
     if 'all' in strategies:
         strategies = ['syntax', 'stopwords', 'simplify', 'synonyms']
     elif 'none' in strategies:
@@ -196,12 +196,22 @@ def main():
     minifier = MiniMarkMinifier()
     minified = minifier.minify(text, strategies)
     
-    # Write output
-    output_path = Path(args.output)
-    # If output path is relative, place it in output/minified/ directory
-    if not output_path.is_absolute():
+    # Auto-generate output path if not provided
+    if args.output is None:
         output_dir = Path(__file__).parent.parent / 'output' / 'minified'
-        output_path = output_dir / output_path
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Create descriptive filename with strategies
+        strategy_suffix = '_'.join(strategies) if strategies else 'baseline'
+        output_name = f"{input_path.stem}_{strategy_suffix}.mm"
+        output_path = output_dir / output_name
+    else:
+        output_path = Path(args.output)
+        # If output path is relative, place it in output/minified/ directory
+        if not output_path.is_absolute():
+            output_dir = Path(__file__).parent.parent / 'output' / 'minified'
+            output_path = output_dir / output_path
+    
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(minified, encoding='utf-8')
     

@@ -19,6 +19,12 @@ results/
     ├── run_001_token_reduction.png
     ├── run_001_similarity_tradeoff.png
     └── ...
+
+output/
+└── minified/                # Minified markdown files
+    ├── technical_doc_syntax_stopwords_simplify.mm
+    ├── readme_example_syntax.mm
+    └── ...
 ```
 
 ## Run Numbering
@@ -63,4 +69,15 @@ python3 scripts/llm_benchmark.py testdata/samples --model gpt-4o
 
 # Visualize latest token reduction results
 python3 scripts/visualize.py
+
+# Minify files with descriptive output names (auto-generated)
+python3 src/minimark.py input.md --strategies syntax stopwords
+# → output/minified/input_syntax_stopwords.mm
 ```
+
+## Minified Output Naming
+
+Minified files use descriptive names showing the strategies applied:
+- Format: `{filename}_{strategy1}_{strategy2}_{...}.mm`
+- Example: `technical_doc_syntax_stopwords_simplify.mm`
+- Makes it easy to compare different strategy combinations
