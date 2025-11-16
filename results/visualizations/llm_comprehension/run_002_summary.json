@@ -1,0 +1,32 @@
+{
+  "run": "002",
+  "model": "gpt4o",
+  "total_files_tested": 4,
+  "avg_comprehension_preserved": 0.8125,
+  "avg_similarity": 0.878125,
+  "total_token_savings": 2309,
+  "question_type_metrics": {
+    "comprehension": {
+      "total": 4,
+      "equivalent": 4,
+      "success_rate": 1.0
+    },
+    "recall": {
+      "total": 4,
+      "equivalent": 2,
+      "success_rate": 0.5
+    },
+    "technical": {
+      "total": 4,
+      "equivalent": 4,
+      "success_rate": 1.0
+    },
+    "procedural": {
+      "total": 4,
+      "equivalent": 3,
+      "success_rate": 0.75
+    }
+  },
+  "pass_threshold": 0.85,
+  "status": "FAIL"
+}

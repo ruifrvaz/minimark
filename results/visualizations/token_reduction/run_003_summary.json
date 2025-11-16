@@ -1,0 +1,48 @@
+{
+  "total_files_tested": 10,
+  "total_strategies_tested": 5,
+  "strategies": {
+    "baseline": {
+      "avg_token_reduction_pct": 0.0,
+      "min_token_reduction_pct": 0.0,
+      "max_token_reduction_pct": 0.0,
+      "avg_processing_time_ms": 0.00119200008157343
+    },
+    "syntax_only": {
+      "avg_token_reduction_pct": 12.711379094838204,
+      "min_token_reduction_pct": 9.090909090909092,
+      "max_token_reduction_pct": 18.267530936947555,
+      "avg_processing_time_ms": 0.23625630010428722,
+      "avg_semantic_similarity": 0.9347488224506378,
+      "min_semantic_similarity": 0.8986335396766663
+    },
+    "syntax_stopwords": {
+      "avg_token_reduction_pct": 28.373198850424842,
+      "min_token_reduction_pct": 18.93476044852192,
+      "max_token_reduction_pct": 35.38461538461539,
+      "avg_processing_time_ms": 2.6790592999986984,
+      "avg_semantic_similarity": 0.8963637053966522,
+      "min_semantic_similarity": 0.8356038928031921
+    },
+    "syntax_stopwords_simplify": {
+      "avg_token_reduction_pct": 29.53923584766049,
+      "min_token_reduction_pct": 19.699286442405707,
+      "max_token_reduction_pct": 36.78321678321678,
+      "avg_processing_time_ms": 2.2936532000130683,
+      "avg_semantic_similarity": 0.8925124049186707,
+      "min_semantic_similarity": 0.8348291516304016
+    },
+    "all_strategies": {
+      "avg_token_reduction_pct": 29.52354373434004,
+      "min_token_reduction_pct": 19.72477064220184,
+      "max_token_reduction_pct": 38.08962264150944,
+      "avg_processing_time_ms": 185.82262569998417,
+      "avg_semantic_similarity": 0.8101658761501312,
+      "min_semantic_similarity": 0.6936855912208557
+    }
+  },
+  "recommendation": {
+    "best_strategy": "syntax_stopwords_simplify",
+    "reason": "Highest token reduction with acceptable semantic preservation"
+  }
+}
