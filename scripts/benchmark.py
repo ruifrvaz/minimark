@@ -26,7 +26,7 @@ class MiniMarkBenchmark:
         'syntax_only': ['syntax'],
         'syntax_stopwords': ['syntax', 'stopwords'],
         'syntax_stopwords_simplify': ['syntax', 'stopwords', 'simplify'],
-        'synonyms': ['syntax', 'stopwords', 'simplify', 'synonyms'],
+        'synonyms_syntax_stopwords_simplify': ['syntax', 'stopwords', 'simplify', 'synonyms'],
     }
     
     def __init__(self, tokenizer_encoding: str = 'cl100k_base'):

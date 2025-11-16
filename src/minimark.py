@@ -217,7 +217,7 @@ def main():
         elif strategies == ['syntax', 'stopwords', 'simplify']:
             strategy_name = 'syntax_stopwords_simplify'
         elif set(strategies) == {'syntax', 'stopwords', 'simplify', 'synonyms'}:
-            strategy_name = 'synonyms'
+            strategy_name = 'synonyms_syntax_stopwords_simplify'
         else:
             # Custom combination
             strategy_name = '_'.join(strategies)
