@@ -143,20 +143,29 @@ class MiniMarkMinifier:
         return ' '.join(replaced_words)
     
     def minify(self, text: str, strategies: list[str]) -> str:
-        """Apply selected minification strategies in order."""
+        """
+        Apply selected minification strategies in optimal order.
+        
+        Order matters! Synonyms should run first while full context is available,
+        then progressively strip away syntax and filler words.
+        """
         result = text
         
+        # 1. Replace synonyms FIRST (while full context available)
+        if 'synonyms' in strategies:
+            result = self.replace_synonyms(result)
+        
+        # 2. Strip markdown syntax
         if 'syntax' in strategies:
             result = self.strip_markdown_syntax(result)
         
+        # 3. Remove stopwords
         if 'stopwords' in strategies:
             result = self.remove_stopwords(result)
         
+        # 4. Simplify sentences (most aggressive, runs last)
         if 'simplify' in strategies:
             result = self.simplify_sentences(result)
-        
-        if 'synonyms' in strategies:
-            result = self.replace_synonyms(result)
         
         return result
 
@@ -198,19 +207,31 @@ def main():
     
     # Auto-generate output path if not provided
     if args.output is None:
-        output_dir = Path(__file__).parent.parent / 'output' / 'minified'
+        # Determine strategy name for folder structure
+        if not strategies:
+            strategy_name = 'baseline'
+        elif strategies == ['syntax']:
+            strategy_name = 'syntax_only'
+        elif strategies == ['syntax', 'stopwords']:
+            strategy_name = 'syntax_stopwords'
+        elif strategies == ['syntax', 'stopwords', 'simplify']:
+            strategy_name = 'syntax_stopwords_simplify'
+        elif set(strategies) == {'syntax', 'stopwords', 'simplify', 'synonyms'}:
+            strategy_name = 'synonyms'
+        else:
+            # Custom combination
+            strategy_name = '_'.join(strategies)
+        
+        output_dir = Path(__file__).parent.parent / 'output' / strategy_name
         output_dir.mkdir(parents=True, exist_ok=True)
         
-        # Create descriptive filename with strategies
-        strategy_suffix = '_'.join(strategies) if strategies else 'baseline'
-        output_name = f"{input_path.stem}_{strategy_suffix}.mm"
-        output_path = output_dir / output_name
+        output_path = output_dir / f"{input_path.stem}.mm"
     else:
         output_path = Path(args.output)
-        # If output path is relative, place it in output/minified/ directory
+        # If output path is relative, place it in output/ directory
         if not output_path.is_absolute():
-            output_dir = Path(__file__).parent.parent / 'output' / 'minified'
-            output_path = output_dir / output_path
+            output_base = Path(__file__).parent.parent / 'output'
+            output_path = output_base / output_path
     
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(minified, encoding='utf-8')

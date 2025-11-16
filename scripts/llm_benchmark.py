@@ -80,6 +80,10 @@ class LLMComprehensionBenchmark:
             {
                 "question": "What instructions or steps are provided to the reader?",
                 "type": "procedural"
+            },
+            {
+                "question": "What are the key takeaways or conclusions from this document?",
+                "type": "synthesis"
             }
         ]
     
@@ -400,8 +404,9 @@ def main():
     parser.add_argument(
         '--strategy',
         nargs='+',
+        choices=['syntax', 'stopwords', 'simplify', 'synonyms'],
         default=['syntax', 'stopwords', 'simplify'],
-        help='Minification strategies to test'
+        help='Minification strategies to test (default: syntax stopwords simplify)'
     )
     parser.add_argument(
         '--model',

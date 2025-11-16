@@ -8,7 +8,7 @@ import sys
 import time
 import csv
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 import tiktoken
 
 # Add src to path
@@ -26,7 +26,7 @@ class MiniMarkBenchmark:
         'syntax_only': ['syntax'],
         'syntax_stopwords': ['syntax', 'stopwords'],
         'syntax_stopwords_simplify': ['syntax', 'stopwords', 'simplify'],
-        'all_strategies': ['syntax', 'stopwords', 'simplify', 'synonyms'],
+        'synonyms': ['syntax', 'stopwords', 'simplify', 'synonyms'],
     }
     
     def __init__(self, tokenizer_encoding: str = 'cl100k_base'):
@@ -47,7 +47,9 @@ class MiniMarkBenchmark:
     def benchmark_file(
         self, 
         file_path: Path, 
-        validate_semantics: bool = True
+        validate_semantics: bool = True,
+        save_outputs: bool = True,
+        output_base_dir: Optional[Path] = None
     ) -> List[Dict]:
         """
         Benchmark all strategies on a single file.
@@ -55,6 +57,8 @@ class MiniMarkBenchmark:
         Args:
             file_path: Path to markdown file
             validate_semantics: Whether to compute semantic similarity
+            save_outputs: Whether to save minified outputs to disk
+            output_base_dir: Base directory for outputs (default: output/)
             
         Returns:
             List of result dictionaries
@@ -69,6 +73,10 @@ class MiniMarkBenchmark:
         if validate_semantics and self.validator is None:
             self.validator = SemanticValidator()
         
+        # Set default output directory
+        if output_base_dir is None:
+            output_base_dir = Path(__file__).parent.parent / 'output'
+        
         results = []
         
         for strategy_name, strategies in self.STRATEGY_CONFIGS.items():
@@ -76,6 +84,14 @@ class MiniMarkBenchmark:
             start_time = time.perf_counter()
             minified_text = self.minifier.minify(original_text, strategies)
             processing_time_ms = (time.perf_counter() - start_time) * 1000
+            
+            # Save minified output to strategy-specific folder
+            if save_outputs:
+                strategy_dir = output_base_dir / strategy_name
+                strategy_dir.mkdir(parents=True, exist_ok=True)
+                
+                output_file = strategy_dir / f"{file_path.stem}.mm"
+                output_file.write_text(minified_text, encoding='utf-8')
             
             # Count tokens
             minified_tokens = self.count_tokens(minified_text)
@@ -107,7 +123,9 @@ class MiniMarkBenchmark:
         self, 
         directory: Path, 
         output_csv: Path,
-        validate_semantics: bool = True
+        validate_semantics: bool = True,
+        save_outputs: bool = True,
+        output_base_dir: Optional[Path] = None
     ) -> None:
         """
         Benchmark all markdown files in a directory.
@@ -116,6 +134,8 @@ class MiniMarkBenchmark:
             directory: Directory containing test markdown files
             output_csv: Path to output CSV file
             validate_semantics: Whether to compute semantic similarity
+            save_outputs: Whether to save minified outputs to disk
+            output_base_dir: Base directory for outputs (default: output/)
         """
         md_files = list(directory.glob('*.md'))
         
@@ -126,6 +146,12 @@ class MiniMarkBenchmark:
         print(f"Found {len(md_files)} markdown files to benchmark")
         print(f"Testing {len(self.STRATEGY_CONFIGS)} strategy configurations")
         print(f"Semantic validation: {'enabled' if validate_semantics else 'disabled'}")
+        
+        if save_outputs:
+            if output_base_dir is None:
+                output_base_dir = Path(__file__).parent.parent / 'output'
+            print(f"Saving minified outputs to: {output_base_dir}/")
+        
         print()
         
         all_results = []
@@ -133,7 +159,12 @@ class MiniMarkBenchmark:
         for i, file_path in enumerate(md_files, 1):
             print(f"[{i}/{len(md_files)}] Benchmarking {file_path.name}...")
             try:
-                results = self.benchmark_file(file_path, validate_semantics)
+                results = self.benchmark_file(
+                    file_path, 
+                    validate_semantics,
+                    save_outputs,
+                    output_base_dir
+                )
                 all_results.extend(results)
             except Exception as e:
                 print(f"  Error: {e}")
@@ -215,6 +246,16 @@ def main():
         default='cl100k_base',
         help='Tiktoken encoding (default: cl100k_base for GPT-4)'
     )
+    parser.add_argument(
+        '--no-save',
+        action='store_true',
+        help='Do not save minified outputs (only generate statistics)'
+    )
+    parser.add_argument(
+        '--output-dir',
+        default=None,
+        help='Base directory for minified outputs (default: output/)'
+    )
     
     args = parser.parse_args()
     
@@ -245,12 +286,17 @@ def main():
         print(f"Error: '{args.input_dir}' is not a directory")
         return 1
     
+    # Set output directory for minified files
+    output_dir = Path(args.output_dir) if args.output_dir else None
+    
     # Run benchmark
     benchmark = MiniMarkBenchmark(tokenizer_encoding=args.encoding)
     benchmark.benchmark_directory(
         input_dir, 
         output_path,
-        validate_semantics=not args.no_validation
+        validate_semantics=not args.no_validation,
+        save_outputs=not args.no_save,
+        output_base_dir=output_dir
     )
     
     return 0

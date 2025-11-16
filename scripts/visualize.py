@@ -27,29 +27,39 @@ class BenchmarkVisualizer:
         Args:
             csv_path: Path to benchmark results CSV
         """
+    def __init__(self, csv_path: Path):
+        """
+        Initialize visualizer with benchmark results.
+        
+        Args:
+            csv_path: Path to benchmark results CSV
+        """
         self.csv_path = csv_path
         self.df = pd.read_csv(csv_path)
+        
+        # Extract run number from filename (e.g., run_003_results.csv)
+        self.run_number = csv_path.stem.split('_')[1] if '_' in csv_path.stem else '001'
         
     def generate_all_visualizations(self, output_dir: Path) -> None:
         """Generate all visualizations and save to output directory."""
         output_dir.mkdir(parents=True, exist_ok=True)
         
-        print("Generating visualizations...")
+        print(f"Generating visualizations for run {self.run_number}...")
         
         # 1. Token reduction comparison
-        self.plot_token_reduction(output_dir / 'token_reduction.png')
+        self.plot_token_reduction(output_dir / f'run_{self.run_number}_token_reduction.png')
         
         # 2. Semantic similarity vs reduction trade-off
-        self.plot_similarity_tradeoff(output_dir / 'similarity_tradeoff.png')
+        self.plot_similarity_tradeoff(output_dir / f'run_{self.run_number}_similarity_tradeoff.png')
         
         # 3. Processing time comparison
-        self.plot_processing_time(output_dir / 'processing_time.png')
+        self.plot_processing_time(output_dir / f'run_{self.run_number}_processing_time.png')
         
         # 4. Per-file breakdown
-        self.plot_per_file_analysis(output_dir / 'per_file_analysis.png')
+        self.plot_per_file_analysis(output_dir / f'run_{self.run_number}_per_file_analysis.png')
         
         # 5. Generate summary JSON
-        self.generate_summary_json(output_dir / 'summary.json')
+        self.generate_summary_json(output_dir / f'run_{self.run_number}_summary.json')
         
         print(f"All visualizations saved to {output_dir}")
     
@@ -252,22 +262,33 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(
-        description='Visualize MiniMark benchmark results'
+        description='Visualize MiniMark token reduction benchmark results'
     )
     parser.add_argument(
         '--input',
-        default='results/benchmark_results.csv',
-        help='Input CSV file with benchmark results'
+        help='Input CSV file with benchmark results (auto-detects latest if omitted)'
     )
     parser.add_argument(
         '--output-dir',
-        default='results',
+        default='results/visualizations/token_reduction',
         help='Output directory for visualizations'
     )
     
     args = parser.parse_args()
     
-    input_path = Path(args.input)
+    # Auto-detect latest token reduction benchmark if not specified
+    if args.input:
+        input_path = Path(args.input)
+    else:
+        results_dir = Path('results') / 'token_reduction'
+        csv_files = list(results_dir.glob('run_*_results.csv'))
+        if not csv_files:
+            print("Error: No token reduction benchmark results found")
+            print("Run benchmark first: python3 scripts/benchmark.py testdata/samples")
+            return 1
+        input_path = max(csv_files, key=lambda p: p.stem)
+        print(f"Using latest result: {input_path.name}")
+    
     output_dir = Path(args.output_dir)
     
     if not input_path.exists():
