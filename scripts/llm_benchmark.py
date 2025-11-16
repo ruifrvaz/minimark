@@ -398,8 +398,8 @@ def main():
     )
     parser.add_argument(
         '--output',
-        default='results/llm_comprehension_benchmark.json',
-        help='Output JSON file path'
+        default=None,
+        help='Output JSON file path (default: auto-generated in results/llm_comprehension/)'
     )
     parser.add_argument(
         '--strategy',
@@ -421,7 +421,25 @@ def main():
     args = parser.parse_args()
     
     input_dir = Path(args.input_dir)
-    output_path = Path(args.output)
+    
+    # Auto-generate output path if not provided
+    if args.output is None:
+        results_base = Path('results') / 'llm_comprehension'
+        results_base.mkdir(parents=True, exist_ok=True)
+        
+        # Get next run number
+        existing_runs = [f for f in results_base.glob('run_*')]
+        if existing_runs:
+            run_numbers = [int(f.stem.split('_')[1]) for f in existing_runs if f.stem.startswith('run_')]
+            next_run = max(run_numbers) + 1 if run_numbers else 1
+        else:
+            next_run = 1
+        
+        # Clean model name for filename (remove periods and dashes)
+        model_name = args.model.replace('.', '').replace('-', '')
+        output_path = results_base / f'run_{next_run:03d}_{model_name}.json'
+    else:
+        output_path = Path(args.output)
     
     if not input_dir.exists():
         print(f"Error: Input directory '{args.input_dir}' not found")
