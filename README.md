@@ -1,6 +1,6 @@
 # MiniMark - Markdown Minifier for LLM Contexts
 
-MiniMark is a Python-based markdown minification tool designed to optimize documents for LLM context windows by reducing token count while preserving semantic meaning.
+MiniMark is a Python-based markdown minification tool designed to optimize documents for LLM context windows by reducing token count while preserving semantic meaning. It is 
 
 ## Features
 
