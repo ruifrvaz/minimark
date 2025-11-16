@@ -8,6 +8,8 @@ MiniMark is a Python-based markdown minification tool designed to optimize docum
 
 **Recommended Strategy: `syntax_stopwords` (28.4% reduction, 89.6% similarity)**
 
+*Semantic similarity measured using cosine similarity of sentence embeddings (all-MiniLM-L6-v2 model).*
+
 | Strategy                           | Token Reduction  | Semantic Similarity |
 |----------                          |----------------  |---------------------|
 | baseline                           | 0.0%             | N/A                 |
