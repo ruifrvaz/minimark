@@ -47,13 +47,19 @@ class LLMBenchmarkVisualizer:
         # 2. Similarity scores distribution
         self.plot_similarity_distribution(output_dir / f'run_{self.run_number}_similarity_distribution.png')
         
-        # 3. Token savings vs comprehension
+        # 3. Compression vs comprehension tradeoff (like token benchmark)
+        self.plot_compression_tradeoff(output_dir / f'run_{self.run_number}_compression_tradeoff.png')
+        
+        # 4. Token savings vs comprehension
         self.plot_token_savings_tradeoff(output_dir / f'run_{self.run_number}_token_savings_tradeoff.png')
         
-        # 4. Question type analysis
+        # 5. Question type analysis
         self.plot_question_type_analysis(output_dir / f'run_{self.run_number}_question_type_analysis.png')
         
-        # 5. Generate summary JSON
+        # 6. Similarity vs comprehension
+        self.plot_similarity_comprehension(output_dir / f'run_{self.run_number}_similarity_comprehension.png')
+        
+        # 7. Generate summary JSON
         self.generate_summary_json(output_dir / f'run_{self.run_number}_summary.json')
         
         print(f"All visualizations saved to {output_dir}")
@@ -141,6 +147,58 @@ class LLMBenchmarkVisualizer:
         
         print(f"  ✓ Similarity distribution chart saved")
     
+    def plot_compression_tradeoff(self, output_path: Path) -> None:
+        """Plot compression ratio vs comprehension preservation (like token benchmark similarity tradeoff)."""
+        files = []
+        comprehension = []
+        compression_pct = []
+        avg_similarity = []
+        
+        for item in self.data:
+            files.append(item['file'].replace('.md', '').replace('_', ' ').title())
+            comp_preserved = item.get('comprehension_preserved', 0) * 100
+            comprehension.append(comp_preserved)
+            
+            # Calculate compression percentage from ratio (1 - ratio) * 100
+            ratio = item.get('compression_ratio', 1.0)
+            compression_pct.append((1 - ratio) * 100)
+            
+            # Get average similarity for this file
+            avg_sim = item.get('avg_similarity', 0)
+            avg_similarity.append(avg_sim)
+        
+        fig, ax = plt.subplots(figsize=(12, 7))
+        
+        # Create scatter plot with size based on similarity
+        scatter = ax.scatter(compression_pct, comprehension, 
+                           s=[sim * 300 for sim in avg_similarity],  # Scale by similarity
+                           alpha=0.6, c=comprehension, cmap='RdYlGn',
+                           edgecolors='black', linewidth=1.5,
+                           vmin=0, vmax=100)
+        
+        # Reference lines
+        ax.axhline(y=85, color='red', linestyle='--', alpha=0.5, 
+                  label='Comprehension Threshold (85%)')
+        ax.axvline(x=np.mean(compression_pct), color='blue', linestyle=':', 
+                  alpha=0.5, label=f'Avg Compression ({np.mean(compression_pct):.1f}%)')
+        
+        ax.set_xlabel('Compression (%)', fontsize=12)
+        ax.set_ylabel('Comprehension Preserved (%)', fontsize=12)
+        ax.set_title(f'Compression vs Comprehension Trade-off - {self.model_name.upper()}\\n(bubble size = avg similarity)', 
+                    fontsize=14, fontweight='bold')
+        ax.legend(loc='lower left')
+        ax.grid(alpha=0.3)
+        
+        # Add colorbar
+        cbar = plt.colorbar(scatter, ax=ax)
+        cbar.set_label('Comprehension %', rotation=270, labelpad=20)
+        
+        plt.tight_layout()
+        plt.savefig(output_path, dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        print(f"  ✓ Compression tradeoff chart saved")
+    
     def plot_token_savings_tradeoff(self, output_path: Path) -> None:
         """Plot token savings vs comprehension preservation."""
         files = []
@@ -157,11 +215,6 @@ class LLMBenchmarkVisualizer:
         scatter = ax.scatter(token_savings, comprehension, s=150, alpha=0.6, 
                            c=comprehension, cmap='RdYlGn', edgecolors='black',
                            vmin=0, vmax=100)
-        
-        # Add file labels
-        for i, file in enumerate(files):
-            ax.annotate(file, (token_savings[i], comprehension[i]),
-                       fontsize=8, alpha=0.7, ha='right')
         
         # Threshold line
         ax.axhline(y=85, color='red', linestyle='--', alpha=0.5, 
@@ -243,6 +296,52 @@ class LLMBenchmarkVisualizer:
         plt.close()
         
         print(f"  ✓ Question type analysis chart saved")
+    
+    def plot_similarity_comprehension(self, output_path: Path) -> None:
+        """Plot average answer similarity vs comprehension preservation."""
+        files = []
+        comprehension = []
+        avg_similarity = []
+        
+        for item in self.data:
+            files.append(item['file'].replace('.md', '').replace('_', ' ').title())
+            comprehension.append(item.get('comprehension_preserved', 0) * 100)
+            avg_similarity.append(item.get('avg_similarity', 0))
+        
+        fig, ax = plt.subplots(figsize=(10, 7))
+        
+        # Scatter plot
+        scatter = ax.scatter(avg_similarity, comprehension, s=150, alpha=0.6,
+                           c=comprehension, cmap='RdYlGn', edgecolors='black',
+                           vmin=0, vmax=100)
+        
+        # Reference lines
+        ax.axhline(y=85, color='red', linestyle='--', alpha=0.5, 
+                  label='Comprehension Threshold (85%)')
+        ax.axvline(x=0.85, color='orange', linestyle='--', alpha=0.5,
+                  label='Similarity Threshold (0.85)')
+        
+        # Ideal region
+        ax.axvspan(0.85, 1.0, ymin=0.85, alpha=0.1, color='green', label='Ideal Region')
+        
+        ax.set_xlabel('Average Answer Similarity', fontsize=12)
+        ax.set_ylabel('Comprehension Preserved (%)', fontsize=12)
+        ax.set_title(f'Answer Similarity vs Comprehension - {self.model_name.upper()}', 
+                    fontsize=14, fontweight='bold')
+        ax.legend(loc='lower right')
+        ax.grid(alpha=0.3)
+        ax.set_xlim(0.5, 1.0)
+        ax.set_ylim(0, 105)
+        
+        # Add colorbar
+        cbar = plt.colorbar(scatter, ax=ax)
+        cbar.set_label('Comprehension %', rotation=270, labelpad=20)
+        
+        plt.tight_layout()
+        plt.savefig(output_path, dpi=300, bbox_inches='tight')
+        plt.close()
+        
+        print(f"  ✓ Similarity vs comprehension chart saved")
     
     def generate_summary_json(self, output_path: Path) -> None:
         """Generate summary statistics as JSON."""

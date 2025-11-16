@@ -1,6 +1,51 @@
 # MiniMark - Markdown Minifier for LLM Contexts
 
-MiniMark is a Python-based markdown minification tool designed to optimize documents for LLM context windows by reducing token count while preserving semantic meaning. It is 
+MiniMark is a Python-based markdown minification tool designed to optimize documents for LLM context windows by reducing token count while preserving semantic meaning.
+
+## Latest Results
+
+### Token Reduction Benchmark (Run 009)
+
+**Recommended Strategy: `syntax_stopwords` (28.4% reduction, 89.6% similarity)**
+
+| Strategy                           | Token Reduction  | Semantic Similarity |
+|----------                          |----------------  |---------------------|
+| baseline                           | 0.0%             | N/A                 |
+| syntax_only                        | 12.7%            | 93.5%               |
+| **syntax_stopwords**               | **28.4%**        | **89.6%**           |
+| syntax_stopwords_simplify          | 29.5%            | 89.3%               |
+| synonyms_syntax_stopwords_simplify | 19.6%            | 83.2%               |
+
+![Similarity vs Token Reduction Trade-off](results/visualizations/token_reduction/run_009_similarity_tradeoff.png)
+
+*The chart shows that `syntax_stopwords` and `syntax_stopwords_simplify` offer the best balance between compression and semantic preservation.*
+
+### LLM Comprehension Benchmark (Run 004 - GPT-4o)
+
+**Strategy Used: `syntax + stopwords` | Overall: 88.0% comprehension**
+
+| Status   | Document                     | Comprehension  | Similarity |
+|--------  |----------                    |--------------  |------------|
+| ✓        | enterprise_planning.md       | 100.0%         | 0.920 |
+| ✓        | programming_tutorial.md      | 100.0%         | 0.950 |
+| ✓        | prompt_engineering_guide.md  | 100.0%         | 0.940 |
+| ✓        | architecture_design.md       | 100.0%         | 0.890 |
+| ✓        | git_commands.md              | 100.0%         | 0.950 |
+| ✗        | project_readme.md            | 80.0%          | 0.860 |
+| ✗        | technical_explanation.md     | 80.0%          | 0.850 |
+| ✗        | rest_api_reference.md        | 80.0%          | 0.906 |
+| ✗        | format_specification.md      | 60.0%          | 0.850 |
+| ✗        | system_architecture.md       | 80.0%          | 0.890 |
+
+![Similarity Distribution](results/visualizations/llm_comprehension/run_004_similarity_distribution.png)
+
+*The histogram shows that most answer similarities cluster above 0.85, indicating strong comprehension preservation.*
+
+**Key Findings:**
+- `syntax + stopwords` achieves 88% comprehension (above 85% threshold)
+- `syntax + stopwords + simplify` drops to 82% comprehension (fails threshold)
+- Adding `simplify` strategy reduces comprehension by 6 percentage points
+- **Recommended for LLM contexts: `syntax + stopwords` only** 
 
 ## Features
 
